@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.android.sample.mymemoapp">
+
+    <!-- 外部ストレージ読み書きのためのパーミッション-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <!-- メモ帳Provoderの読み込み権限を宣言する-->
+    <permission android:name="com.example.android.sample.mymemoapp.memo.read"
+        android:protectionLevel="normal"
+        android:label="@string/permission_memo_read_label"
+        android:description="@string/permission_memo_read_description"/>
+
+    <!-- メモ帳Providerの書き込み権限を宣言する-->
+    <permission android:name="com.example.android.sample.mymemoapp.memo.write"
+        android:protectionLevel="signature"
+        android:label="@string/permission_memo_write_label"
+        android:description="@string/permission_memo_write_description"/>
+
+    <!-- 作成したパーミッションの使用を宣言する-->
+    <uses-permission android:name="com.example.android.sample.mymemoapp.memo.read"/>
+    <uses-permission android:name="com.example.android.sample.mymemoapp.memo.write"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MemoActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".SettingActivity"
+            android:label="@string/app_name" />
+        <provider
+            android:authorities="com.example.android.sample.mymemoapp.memo"
+            android:name=".MemoProvider"
+            android:writePermission="com.example.android.sample.mymemoapp.memo.write"
+            android:readPermission="com.example.android.sample.mymemoapp.memo.read"
+            android:exported="true"/>
+    </application>
+
+</manifest>
